@@ -1,15 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace Contact.Manager.Users.Api
 {
@@ -26,6 +23,7 @@ namespace Contact.Manager.Users.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            SwaggerConfigureService(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,13 +37,43 @@ namespace Contact.Manager.Users.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint($"{ApiInfo.Version}/swagger.json", $"{ApiInfo.Name} {ApiInfo.Version}");
+                c.ShowExtensions();
+            });
 
             app.UseAuthorization();
+
+            app.UseSwagger();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void SwaggerConfigureService(IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc(ApiInfo.Version, new OpenApiInfo
+                {
+                    Title = ApiInfo.Name,
+                    Version = ApiInfo.Version,
+                    Description = ApiInfo.Description,
+                    Contact = new OpenApiContact
+                    {
+                        Name = ApiInfo.Name,
+                        Url = new Uri(ApiInfo.Url)
+                    },
+                });
+                var xmlFile = $"{Assembly.GetEntryAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+
+            services.AddSwaggerGenNewtonsoftSupport();
         }
     }
 }

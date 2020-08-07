@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Contact.Manager.Users.Api</name>
+    </assembly>
+    <members>
+        <member name="F:Contact.Manager.Users.Api.ApiInfo.Version">
+            <summary>
+            Web API version.
+            </summary>
+        </member>
+        <member name="F:Contact.Manager.Users.Api.ApiInfo.Description">
+            <summary>
+            Descrição da api no swagger
+            </summary>
+        </member>
+        <member name="F:Contact.Manager.Users.Api.ApiInfo.Url">
+            <summary>
+            Url de contato da api
+            </summary>
+        </member>
+        <member name="F:Contact.Manager.Users.Api.ApiInfo.ContactName">
+            <summary>
+            Url de contato da api
+            </summary>
+        </member>
+    </members>
+</doc>
