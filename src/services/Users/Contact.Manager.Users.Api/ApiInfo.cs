@@ -17,7 +17,7 @@ namespace Contact.Manager.Users.Api
         /// <summary>
         /// Url de contato da api
         /// </summary>
-        public const string Url = "http://url.contato.api";
+        public const string Url = "https://github.com/lyracampos/Contact-manager";
 
         /// <summary>
         /// Url de contato da api
