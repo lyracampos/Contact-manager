@@ -1,0 +1,11 @@
+
+
+[Bb]in/
+[Oo]bj/
+.vs/
+.vscode/
+#**/Properties/launchSettings.json
+
+#**/*.opencover.xml
+#Contact.Manager.Tests/coverage.opencover.xml
+.DS_Store
