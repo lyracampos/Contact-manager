@@ -68,6 +68,7 @@ namespace Contact.Manager.Users.Api
                         Url = new Uri(ApiInfo.Url)
                     },
                 });
+                c.EnableAnnotations();
                 var xmlFile = $"{Assembly.GetEntryAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
