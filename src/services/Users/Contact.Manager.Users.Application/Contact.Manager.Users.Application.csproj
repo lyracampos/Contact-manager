@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\Contact.Manager.Framework\Contact.Manager.Framework.csproj" />
+    <ProjectReference Include="..\Contact.Manager.Users.Domain\Contact.Manager.Users.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,8 +1,9 @@
 using System;
+using Contact.Manager.Framework.Domain;
 
 namespace Contact.Manager.Users.Domain.Entities
 {
-    public class User
+    public class User : Entity
     {
         public User(string name, string email, string password, DateTime birth)
         {
