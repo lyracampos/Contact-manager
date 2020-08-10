@@ -1,8 +1,9 @@
 using System;
+using Contact.Manager.Framework.Application;
 
 namespace Contact.Manager.Users.Application.Commands.Register
 {
-    public class RegisterCommand
+    public class RegisterCommand : ICommand
     {
         /// <summary>
 		/// Nome do usuário

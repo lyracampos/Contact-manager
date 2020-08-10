@@ -1,7 +1,9 @@
+using System;
 using System.Threading.Tasks;
 using Contact.Manager.Users.Application.Commands.Authentication;
 using Contact.Manager.Users.Application.Commands.Edit;
 using Contact.Manager.Users.Application.Commands.Register;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,18 +12,25 @@ namespace Contact.Manager.Users.Api.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class AccountController
+    public class AccountController : ControllerBase
     {
+
+        private readonly IMediator mediator;
+
+        public AccountController(IMediator mediator)
+        {
+            this.mediator = mediator;
+        }
 
         [HttpPost]
         [Route("register")]
         [ProducesResponseType(typeof(RegisterCommandResult), StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public  Task<IActionResult> Post([FromBody] RegisterCommand request)
+        public async Task<IActionResult> Post([FromBody] RegisterCommand request)
         {
-
-            return null;
+            var result = await mediator.Send(request);
+            return Created("", result);
         }
 
         [HttpPut]
@@ -30,10 +39,10 @@ namespace Contact.Manager.Users.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public  Task<IActionResult> Put([FromBody] EditCommad request)
+        public async Task<IActionResult> Put([FromBody] EditCommad request)
         {
-
-            return null;
+            var result = await mediator.Send(request);
+            return Ok(result);
         }
 
         [HttpPost]
@@ -42,10 +51,10 @@ namespace Contact.Manager.Users.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public  Task<IActionResult> Authenticate([FromBody] AuthenticateCommand request)
+        public async Task<IActionResult> Authenticate([FromBody] AuthenticateCommand request)
         {
-
-            return null;
+            var result = await mediator.Send(request);
+            return NotFound();
         }
     }
 }

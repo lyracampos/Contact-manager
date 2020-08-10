@@ -1,7 +1,9 @@
+using Contact.Manager.Framework.Application;
+
 namespace Contact.Manager.Users.Application.Commands.Edit
 {
-    public class EditCommad
+    public class EditCommad : ICommand
     {
-        
+
     }
 }

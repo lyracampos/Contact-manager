@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,8 @@ namespace Contact.Manager.Users.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            var assembly = AppDomain.CurrentDomain.Load("Contact.Manager.Users.Application");
+            services.AddMediatR(assembly);
             SwaggerConfigureService(services);
         }
 
