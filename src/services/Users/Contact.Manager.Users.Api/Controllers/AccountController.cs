@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Contact.Manager.Users.Application.Commands.Authentication;
 using Contact.Manager.Users.Application.Commands.Edit;
@@ -14,8 +13,7 @@ namespace Contact.Manager.Users.Api.Controllers
     [Produces("application/json")]
     public class AccountController : ControllerBase
     {
-
-        private readonly IMediator mediator;
+                private readonly IMediator mediator;
 
         public AccountController(IMediator mediator)
         {
@@ -24,7 +22,7 @@ namespace Contact.Manager.Users.Api.Controllers
 
         [HttpPost]
         [Route("register")]
-        [ProducesResponseType(typeof(RegisterCommandResult), StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody] RegisterCommand request)
@@ -35,7 +33,7 @@ namespace Contact.Manager.Users.Api.Controllers
 
         [HttpPut]
         [Route("{id}/edit")]
-        [ProducesResponseType(typeof(EditCommandResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -47,7 +45,7 @@ namespace Contact.Manager.Users.Api.Controllers
 
         [HttpPost]
         [Route("authenticate")]
-        [ProducesResponseType(typeof(AuthenticateCommandResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

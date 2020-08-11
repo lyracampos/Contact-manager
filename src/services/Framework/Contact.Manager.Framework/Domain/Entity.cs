@@ -2,7 +2,7 @@ using System;
 
 namespace Contact.Manager.Framework.Domain
 {
-    public class Entity
+public class Entity
     {
         public Entity()
         {

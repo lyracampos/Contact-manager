@@ -1,3 +1,4 @@
+using System;
 using Contact.Manager.Users.Infrastructure.Models;
 using MongoDB.Driver;
 
@@ -6,6 +7,7 @@ namespace Contact.Manager.Users.Infrastructure.Context
     public class DbContext : IDbContext
     {
         private IMongoDatabase mongoDatabase;
+        private bool disposedValue = false;
 
         public DbContext()
         {
@@ -14,7 +16,7 @@ namespace Contact.Manager.Users.Infrastructure.Context
             mongoDatabase = client.GetDatabase("ContactManager");
         }
 
-         public IMongoCollection<User> Users
+        public IMongoCollection<User> Users
         {
             get
             {
@@ -25,7 +27,17 @@ namespace Contact.Manager.Users.Infrastructure.Context
 
         public void Dispose()
         {
-            throw new System.NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        public void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                mongoDatabase = null;
+                disposedValue = true;
+            }
         }
     }
 }

@@ -16,5 +16,11 @@ namespace Contact.Manager.Users.Domain.Entities
         public string Email { get; private set; }
         public string Password { get; private set; }
         public DateTime Birth { get; private set; }
+
+        public void Update(string name, DateTime birth)
+        {
+            this.Name = name;
+            this.Birth = birth;
+        }
     }
 }
