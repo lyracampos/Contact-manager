@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Contact.Manager.Users.Application.Commands.Edit
 {
-    public class EditCommandHandler : IRequestHandler<EditCommad, int>
+    public class EditCommandHandler : IRequestHandler<EditCommad, bool>
     {
         private readonly IUserRepository userRepository;
 
@@ -13,19 +13,19 @@ namespace Contact.Manager.Users.Application.Commands.Edit
         {
             this.userRepository = userRepository;
         }
-        public async Task<int> Handle(EditCommad request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(EditCommad request, CancellationToken cancellationToken)
         {
             var user = await this.userRepository.GetById(request.Id);
 
             if (user == null)
             {
-                return 0;
+                return false;
             }
 
             user.Update(request.Name, request.Birth);
             
             await this.userRepository.Update(user);
-            return 1;
+            return true;
         }
     }
 }

@@ -1,9 +1,11 @@
 using System;
 using System.IO;
 using System.Reflection;
+using Contact.Manager.Users.Api.Behaviors;
 using Contact.Manager.Users.Domain.Repositories;
 using Contact.Manager.Users.Infrastructure.Context;
 using Contact.Manager.Users.Infrastructure.Repositories;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +32,10 @@ namespace Contact.Manager.Users.Api
             
             var assembly = AppDomain.CurrentDomain.Load("Contact.Manager.Users.Application");
             services.AddMediatR(assembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorPipelineBehavior<,>));
+            services.AddValidatorsFromAssembly(assembly);
+
+
             services.AddTransient<IDbContext, DbContext>();
             services.AddTransient<IUserRepository, UserRepository>();
 

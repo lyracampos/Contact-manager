@@ -1,9 +1,9 @@
 using System;
-using Contact.Manager.Framework.Application;
+using MediatR;
 
 namespace Contact.Manager.Users.Application.Commands.Edit
 {
-    public class EditCommad : ICommand
+    public class EditCommad : IRequest<bool>
     {
         /// <summary>
 		/// Identificador do usuário

@@ -4,9 +4,9 @@ using MediatR;
 
 namespace Contact.Manager.Users.Application.Commands.Authentication
 {
-    public class AuthenticateCommandHandler : IRequestHandler<AuthenticateCommand, int>
+    public class AuthenticateCommandHandler : IRequestHandler<AuthenticateCommand, bool>
     {
-        public Task<int> Handle(AuthenticateCommand request, CancellationToken cancellationToken)
+        public Task<bool> Handle(AuthenticateCommand request, CancellationToken cancellationToken)
         {
             throw new System.NotImplementedException();
         }
