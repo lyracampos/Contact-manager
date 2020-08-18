@@ -11,7 +11,7 @@ namespace Contact.Manager.Users.Infrastructure.Context
 
         public DbContext()
         {
-            var connectionString = "<mongodb-connectionstriong";
+            var connectionString = "mongodb://lyracampos:NpMe7aTkkkk@cluster0-shard-00-00.8hjil.mongodb.net:27017,cluster0-shard-00-01.8hjil.mongodb.net:27017,cluster0-shard-00-02.8hjil.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-pb9pc3-shard-0&authSource=admin&retryWrites=true&w=majority";
             var client = new MongoClient(connectionString);
             mongoDatabase = client.GetDatabase("ContactManager");
         }

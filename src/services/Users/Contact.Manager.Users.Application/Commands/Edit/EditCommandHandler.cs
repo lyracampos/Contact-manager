@@ -1,11 +1,12 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Contact.Manager.Users.Framework.Application;
 using Contact.Manager.Users.Domain.Repositories;
 using MediatR;
 
 namespace Contact.Manager.Users.Application.Commands.Edit
 {
-    public class EditCommandHandler : IRequestHandler<EditCommad, bool>
+    public class EditCommandHandler : IRequestHandler<EditCommad, CommandResult>
     {
         private readonly IUserRepository userRepository;
 
@@ -13,19 +14,17 @@ namespace Contact.Manager.Users.Application.Commands.Edit
         {
             this.userRepository = userRepository;
         }
-        public async Task<bool> Handle(EditCommad request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(EditCommad request, CancellationToken cancellationToken)
         {
             var user = await this.userRepository.GetById(request.Id);
 
             if (user == null)
             {
-                return false;
+                return new CommandResult().NotFound("Usuário não encontrado.");
             }
-
             user.Update(request.Name, request.Birth);
-            
             await this.userRepository.Update(user);
-            return true;
+            return new CommandResult();
         }
     }
 }

@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Contact.Manager.Users.Framework.Application;
 using FluentValidation;
+using FluentValidation.Results;
 using MediatR;
 
 namespace Contact.Manager.Users.Api.Behaviors
@@ -24,12 +26,28 @@ namespace Contact.Manager.Users.Api.Behaviors
                 .Where(error => error != null)
                 .ToList();
 
-            if (failures.Any())
             {
                 throw new ValidationException(failures);
             }
+            //    return failures.Any()
+            //         ? Errors(failures)
+            //         : next();
+        }
 
-            return next();
+        private static Task<TResponse> Errors(IEnumerable<ValidationFailure> failures)
+        {
+            var commandResult = new CommandResult();
+
+            return null;
+            //return commandResult.Errors;
+            // var response = new Response();
+
+            // foreach (var failure in failures)
+            // {
+            //     response.AddError(failure.ErrorMessage);
+            // }
+
+            // return Task.FromResult(response as TResponse);
         }
     }
 }
