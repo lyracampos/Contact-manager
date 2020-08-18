@@ -26,12 +26,9 @@ namespace Contact.Manager.Users.Api.Behaviors
                 .Where(error => error != null)
                 .ToList();
 
-            {
-                throw new ValidationException(failures);
-            }
-            //    return failures.Any()
-            //         ? Errors(failures)
-            //         : next();
+            return failures.Any()
+                 ? throw new ValidationException(failures)
+                 : next();
         }
 
         private static Task<TResponse> Errors(IEnumerable<ValidationFailure> failures)
