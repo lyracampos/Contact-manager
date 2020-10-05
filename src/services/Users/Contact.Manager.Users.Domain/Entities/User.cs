@@ -1,5 +1,5 @@
 using System;
-using Contact.Manager.Users.Framework.Domain;
+using Contact.Manager.Framework.Domain;
 
 namespace Contact.Manager.Users.Domain.Entities
 {

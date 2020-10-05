@@ -1,5 +1,5 @@
 using System;
-using Contact.Manager.Users.Framework.Application;
+using Contact.Manager.Framework.Application;
 using Contact.Manager.Users.Domain.Entities;
 using MediatR;
 

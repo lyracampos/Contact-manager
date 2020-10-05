@@ -10,6 +10,9 @@
     <ProjectReference Include="..\Contact.Manager.Users.Application\Contact.Manager.Users.Application.csproj" />
     <ProjectReference Include="..\Contact.Manager.Users.Infrastructure\Contact.Manager.Users.Infrastructure.csproj" />
     <ProjectReference Include="..\Contact.Manager.Users.Domain\Contact.Manager.Users.Domain.csproj" />
+    <ProjectReference Include="..\..\Framework\Contact.Manager.Framework\Contact.Manager.Framework.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Contact.Manager.Users.Framework.Application;
+using Contact.Manager.Framework.Application;
 using MediatR;
 
 namespace Contact.Manager.Users.Application.Commands.Authentication

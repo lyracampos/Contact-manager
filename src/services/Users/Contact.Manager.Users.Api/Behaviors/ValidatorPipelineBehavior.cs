@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Contact.Manager.Users.Framework.Application;
+using Contact.Manager.Framework.Application;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
@@ -27,7 +27,7 @@ namespace Contact.Manager.Users.Api.Behaviors
                 .ToList();
 
             return failures.Any()
-                 ? throw new ValidationException(failures)
+                 ? throw new ValidationException("Ocorreu um erro interno.", failures, true)
                  : next();
         }
 

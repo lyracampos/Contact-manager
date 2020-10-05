@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Contact.Manager.Users.Framework\Contact.Manager.Users.Framework.csproj" />
+    <ProjectReference Include="..\..\Framework\Contact.Manager.Framework\Contact.Manager.Framework.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
