@@ -31,11 +31,10 @@ namespace Contact.Manager.Users
         {
             services.AddControllers();
 
-            var assembly = AppDomain.CurrentDomain.Load("Contact.Manager.Users");
-            services.AddMediatR(assembly);
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorPipelineBehavior<,>));
-            services.AddValidatorsFromAssembly(assembly);
-
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient<IDbContext, DbContext>();
             services.AddTransient<IUserRepository, UserRepository>();
 
