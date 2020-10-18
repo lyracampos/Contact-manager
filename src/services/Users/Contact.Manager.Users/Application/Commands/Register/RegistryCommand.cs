@@ -32,6 +32,16 @@ namespace Contact.Manager.Users.Application.Commands.Register
         /// </summary>
         public DateTime Birth { get; set; }
 
+        public bool PasswordValid()
+        {
+            if (!string.IsNullOrEmpty(Password) &&
+                !string.IsNullOrEmpty(PasswordConfirm))
+            {
+                return Password.Equals(PasswordConfirm);
+            }
+            return false;
+        }
+
         public User ToUser()
         {
             return new User(this.Name, this.Email, this.Password, this.Birth);

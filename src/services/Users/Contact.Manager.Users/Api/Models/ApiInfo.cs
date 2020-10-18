@@ -2,7 +2,7 @@ namespace Contact.Manager.Users.Api.Models
 {
     public static class ApiInfo
     {
-         public const string Name = "Contact.Manager.Users";
+         public const string Name = "Contact Manager Users";
 
         /// <summary>
         /// Web API version.
@@ -12,7 +12,7 @@ namespace Contact.Manager.Users.Api.Models
         /// <summary>
         /// Descrição da api no swagger
         /// </summary>
-        public const string Description = "API de gerenciamento de usuários do Contact Manager.";
+        public const string Description = "API de gerenciamento dos usuários da plataforma Contact Manager.";
 
         /// <summary>
         /// Url de contato da api
