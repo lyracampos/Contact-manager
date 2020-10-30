@@ -14,6 +14,11 @@ using Microsoft.OpenApi.Models;
 using Contact.Manager.Users.Api.Models;
 using System.Reflection;
 using System.IO;
+using Contact.Manager.Users.Application.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Contact.Manager.Users.Api.Settings;
 
 namespace Contact.Manager.Users
 {
@@ -39,29 +44,27 @@ namespace Contact.Manager.Users
             services.AddTransient<IUserRepository, UserRepository>();
 
             SwaggerConfigureService(services);
+            AuthenticationConfigureService(services);
+            services.AddTransient<IJwtAuthenticationService, JwtAuthenticationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-           if (env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
-
             app.UseRouting();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint($"{ApiInfo.Version}/swagger.json", $"{ApiInfo.Name} {ApiInfo.Version}");
                 c.ShowExtensions();
             });
-
-            app.UseAuthorization();
-
             app.UseSwagger();
-
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -90,6 +93,29 @@ namespace Contact.Manager.Users
             });
 
             services.AddSwaggerGenNewtonsoftSupport();
+        }
+
+        private void AuthenticationConfigureService(IServiceCollection services)
+        {
+             var key = Encoding.ASCII.GetBytes(ConfigurationSettings.Secret);
+            services
+                .AddAuthentication(p =>
+                {
+                    p.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    p.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(p =>
+                {
+                    p.RequireHttpsMetadata = false;
+                    p.SaveToken = true;
+                    p.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Contact.Manager.Users.Domain.Entities;
 using Contact.Manager.Users.Domain.Repositories;
 using Contact.Manager.Users.Infrastructure.Context;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Contact.Manager.Users.Infrastructure.Repositories
@@ -21,9 +22,19 @@ namespace Contact.Manager.Users.Infrastructure.Repositories
         public async Task<User> GetById(Guid id)
         {
             var userDb = await this.context.Users.Find(p => p.Id == id.ToString()).SingleOrDefaultAsync();
-            return userDb.MapToDomain();
+            if (userDb != null)
+                return userDb.MapToDomain();
+            return null;
         }
 
+        public async Task<User> GetByEmail(string email)
+        {
+            var filter = Builders<Models.User>.Filter.Eq(e => e.Email, email);
+            var userDb = await this.context.Users.FindSync(filter).FirstOrDefaultAsync();
+            if (userDb != null)
+                return userDb.MapToDomain();
+            return null;
+        }
         public async Task Add(User entity)
         {
             var user = new Models.User().MapToDb(entity);

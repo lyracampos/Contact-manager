@@ -15,9 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Manager.Contacts.Do
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Manager.Contacts.Infrastructure", "Contacts\Contact.Manager.Contacts.Infrastructure\Contact.Manager.Contacts.Infrastructure.csproj", "{3E76098F-4BD1-49D9-90BC-32B368140C3B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{093E0B54-4079-47C4-AE19-B05D15C8D758}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{093E0B54-4079-47C4-AE19-B05D15C8D758}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Manager.Framework", "Framework\Contact.Manager.Framework\Contact.Manager.Framework.csproj", "{8EEFC416-79A8-40AA-A94D-1D9C7FA305EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Manager.Core", "Core\Contact.Manager.Core\Contact.Manager.Core.csproj", "{8EEFC416-79A8-40AA-A94D-1D9C7FA305EC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Manager.Users", "Users\Contact.Manager.Users\Contact.Manager.Users.csproj", "{D8CC7F62-CF78-4100-B326-95190726E78E}"
 EndProject

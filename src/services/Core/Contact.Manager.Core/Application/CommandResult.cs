@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Net;
 
-namespace Contact.Manager.Framework.Application
+namespace Contact.Manager.Core.Application
 {
     public class CommandResult
     {
@@ -16,10 +16,9 @@ namespace Contact.Manager.Framework.Application
         public List<string> Errors { get; private set; }
         public HttpStatusCode StatusCode { get; private set; }
 
-        public CommandResult Created()
+        public void Created()
         {
             StatusCode = HttpStatusCode.Created;
-            return this;
         }
 
         public CommandResult NotFound(string message)
@@ -28,7 +27,12 @@ namespace Contact.Manager.Framework.Application
             Message = message;
             StatusCode = HttpStatusCode.NotFound;
             return this;
+        }
 
+        public CommandResult Created(string message)
+        {
+            StatusCode = HttpStatusCode.Created;
+            return this;
         }
     }
 }

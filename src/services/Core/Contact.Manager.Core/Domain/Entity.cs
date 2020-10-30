@@ -1,6 +1,6 @@
 using System;
 
-namespace Contact.Manager.Framework.Domain
+namespace Contact.Manager.Core.Domain
 {
 public class Entity
     {

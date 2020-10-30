@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Contact.Manager.Framework.Domain
+namespace Contact.Manager.Core.Domain
 {
     public interface IRepository<T> where T : Entity
     {

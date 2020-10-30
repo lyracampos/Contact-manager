@@ -1,11 +1,11 @@
 using System;
-using Contact.Manager.Framework.Application;
+using Contact.Manager.Core.Application;
 using Contact.Manager.Users.Domain.Entities;
 using MediatR;
 
 namespace Contact.Manager.Users.Application.Commands.Register
 {
-    public class RegisterCommand : IRequest<CommandResult>
+    public class RegisterCommand : IRequest<RegisterCommandResult>
     {
         /// <summary>
 		/// Nome do usuário

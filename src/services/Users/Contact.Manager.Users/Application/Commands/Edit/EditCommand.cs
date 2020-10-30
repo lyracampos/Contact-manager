@@ -1,10 +1,10 @@
 using System;
-using Contact.Manager.Framework.Application;
+using Contact.Manager.Core.Application;
 using MediatR;
 
 namespace Contact.Manager.Users.Application.Commands.Edit
 {
-    public class EditCommad : IRequest<CommandResult>
+    public class EditCommand : IRequest<EditCommandResult>
     {
         /// <summary>
 		/// Identificador do usuário
@@ -15,11 +15,6 @@ namespace Contact.Manager.Users.Application.Commands.Edit
         /// Nome do usuário
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// Email do usuário
-        /// </summary>
-        public string Email { get; set; }
 
         /// <summary>
         /// Data de nascimento do usuário

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Contact.Manager.Framework.Application;
+using Contact.Manager.Core.Application;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
@@ -20,16 +20,6 @@ namespace Contact.Manager.Users.Api.Behaviors
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            // var failures = validators
-            //     .Select(validator => validator.Validate(request))
-            //     .SelectMany(result => result.Errors)
-            //     .Where(error => error != null)
-            //     .ToList();
-
-            // return failures.Any()
-            //      ? throw new ValidationException("Ocorreu um erro interno.", failures, true)
-            //      : next();
-
             if (validators.Any())
             {
                 var context = new ValidationContext<TRequest>(request);

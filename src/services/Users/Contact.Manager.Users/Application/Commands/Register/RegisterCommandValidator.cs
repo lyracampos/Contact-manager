@@ -6,38 +6,40 @@ namespace Contact.Manager.Users.Application.Commands.Register
     public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
     {
         private readonly IUserRepository userRepository;
-        public RegisterCommandValidator(IUserRepository userRepository)
+
+        private void ValidateName()
         {
-            this.userRepository = userRepository;
-
             RuleFor(p => p.Name)
-                .NotEmpty()
-                .NotNull()
-                .WithMessage("O campo Nome é obrigatório.");
-
+                .NotEmpty().NotNull().WithMessage("O campo Nome é obrigatório.");
+        }
+        private void ValidateEmail()
+        {
             RuleFor(p => p.Email)
-                .NotEmpty()
-                .NotNull()
-                .WithMessage("O campo Email é obrigatório.")
-                .EmailAddress()
-                .WithMessage("O campo Email está inválido.");
+               .NotEmpty().NotNull().WithMessage("O campo Email é obrigatório.")
+               .EmailAddress().WithMessage("O campo Email está inválido.");
 
-            RuleFor(p => p.Birth)
-                .NotNull()
-                .WithMessage("O campo Data de nascimento é obrigatório.");
+            When(p => !string.IsNullOrEmpty(p.Email), () =>
+            {
+                RuleFor(p => p).Custom((p, context) =>
+                {
+                    var user = this.userRepository.GetByEmail(p.Email).Result;
+                    if (user != null)
+                    {
+                        context.AddFailure("Email", $"O e-mail informado já esta em uso. '{p.Email}'");
+                    }
+                });
+            });
+        }
 
+        private void ValidatePassword()
+        {
             RuleFor(p => p.Password)
-                .NotEmpty()
-                .NotNull()
-                .WithMessage("O campo Password é obrigatório.");
+               .NotEmpty().NotNull().WithMessage("O campo Password é obrigatório.");
 
             RuleFor(p => p.PasswordConfirm)
-               .NotEmpty()
-               .NotNull()
-               .WithMessage("O campo Confirmação de Password é obrigatório.");
+               .NotEmpty().NotNull().WithMessage("O campo Confirmação de Password é obrigatório.");
 
-            When(p => !string.IsNullOrEmpty(p.PasswordConfirm) &&
-                      !string.IsNullOrEmpty(p.PasswordConfirm), () =>
+            When(p => !string.IsNullOrEmpty(p.PasswordConfirm) && !string.IsNullOrEmpty(p.PasswordConfirm), () =>
             {
                 RuleFor(p => p).Custom((p, context) =>
                 {
@@ -47,16 +49,13 @@ namespace Contact.Manager.Users.Application.Commands.Register
                     }
                 });
             });
-
-
-            //         RuleFor(x => x).Custom((x, context) =>
-            // {
-            //     if (x.Password != x.ConfirmPassword)
-            //     {
-            //         context.AddFailure(nameof(x.Password), "Passwords should match");
-            //     }
-            // });
-
+        }
+        public RegisterCommandValidator(IUserRepository userRepository)
+        {
+            this.userRepository = userRepository;
+            ValidateName();
+            ValidateEmail();
+            ValidatePassword();
         }
     }
 }
